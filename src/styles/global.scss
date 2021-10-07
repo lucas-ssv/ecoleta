@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #f0f0f5;
+  --block: #ffffff;
+  --support-text: #a0a0b2;
+  --text: #6c6c80;
+  --title: #322153;
+  --desaturated: #e1faec;
+  --greenpeace: #34cb79;
+}
+
+body {
+  height: 100%;
+  background: var(--background);
+  font: 14px "Roboto", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
