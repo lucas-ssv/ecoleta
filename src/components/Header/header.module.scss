@@ -1,0 +1,22 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+
+  a {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--title);
+    text-decoration: none;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
