@@ -14,10 +14,29 @@
   --greenpeace: #34cb79;
 }
 
+@media (max-width: 1200px) {
+  html,
+  body {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 720px) {
+  html,
+  body {
+    font-size: 87.25%;
+  }
+}
+
 body {
   height: 100%;
   background: var(--background);
   font: 14px "Roboto", sans-serif;
+}
+
+input,
+textarea {
+  font-family: Roboto;
 }
 
 button {
