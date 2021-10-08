@@ -1,0 +1,17 @@
+.container {
+  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.homeContainer {
+  height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: grid;
+  grid-template-rows: 108px 1fr;
+  align-items: center;
+}
