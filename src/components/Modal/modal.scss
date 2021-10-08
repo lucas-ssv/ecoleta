@@ -1,0 +1,24 @@
+.ReactModal__Overlay {
+  background: #0e0a14 !important;
+  opacity: 0.95;
+}
+
+.ReactModal__Content {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  background: none !important;
+  border: 0 !important;
+  color: var(--block);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
