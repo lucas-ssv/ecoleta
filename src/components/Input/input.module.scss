@@ -1,0 +1,15 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  margin: 0.5rem 0;
+
+  input {
+    border: 0;
+    padding: 1.2rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
+}
