@@ -1,5 +1,11 @@
-.collectionItems {
+.cardBody {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  bottom: 6rem;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }

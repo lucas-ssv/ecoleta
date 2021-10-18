@@ -6,5 +6,5 @@ interface CardBodyProps {
 }
 
 export function CardBody({ children }: CardBodyProps) {
-  return <section className={styles.collectionItems}>{children}</section>;
+  return <section className={styles.cardBody}>{children}</section>;
 }
