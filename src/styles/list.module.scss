@@ -1,0 +1,16 @@
+.listContainer {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 309px 1fr;
+  background: var(--background);
+
+  article {
+    background: var(--block);
+  }
+}
+
+.foundPoints {
+  font-size: 1rem;
+  color: var(--text);
+  margin-top: 2.5rem;
+}
