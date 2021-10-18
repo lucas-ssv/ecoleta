@@ -1,6 +1,6 @@
 import { FiArrowLeft } from "react-icons/fi";
 import { Button } from "../components/Button";
-import { Cards } from "../components/Cards";
+import { Items } from "../components/Items";
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import styles from "../styles/register.module.scss";
@@ -38,7 +38,7 @@ export function Register() {
           <p>Selecione um ou mais itens abaixo</p>
         </div>
 
-        <Cards />
+        <Items />
 
         <div className={styles.submitting}>
           <Button type="button" text="Cadastrar ponto de coleta" />
