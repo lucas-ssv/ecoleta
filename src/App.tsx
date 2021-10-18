@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { CardItemProvider } from "./contexts/CardItemContext";
+import { ItemProvider } from "./contexts/ItemContext";
 import { ModalProvider } from "./contexts/ModalContext";
 import { Routes } from "./routes";
 
@@ -7,9 +7,9 @@ export function App() {
   return (
     <BrowserRouter>
       <ModalProvider>
-        <CardItemProvider>
+        <ItemProvider>
           <Routes />
-        </CardItemProvider>
+        </ItemProvider>
       </ModalProvider>
     </BrowserRouter>
   );
