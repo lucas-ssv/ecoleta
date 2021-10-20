@@ -1,11 +1,57 @@
+import { useContext } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { FiArrowLeft } from "react-icons/fi";
+import { ItemContext } from "../contexts/ItemContext";
 import { Button } from "../components/Button";
 import { Items } from "../components/Items";
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import styles from "../styles/register.module.scss";
 
+interface IFormProps {
+  entity: string;
+  address: string;
+  number: number;
+  city: string;
+  state: string;
+  imageUrl: string;
+}
+
+const schema = yup.object({
+  entity: yup.string().required("Campo entidade obrigatório"),
+  address: yup.string().required("Campo endereço obrigatório"),
+  number: yup.number().required().typeError("Campo número obrigatório"),
+  city: yup.string().required("Campo cidade obrigatório"),
+  state: yup.string().required("Campo estado obrigatório"),
+  imageUrl: yup.string().required("Campo link da imagem obrigatório"),
+});
+
 export function Register() {
+  const { items } = useContext(ItemContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormProps>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<IFormProps> = (point) => {
+    const formattedPoint = {
+      entity: point.entity,
+      items,
+      address: point.address,
+      number: point.number,
+      city: point.city,
+      state: point.state,
+      imageUrl: point.imageUrl,
+    };
+
+    console.log(formattedPoint);
+  };
+
   return (
     <main className="container">
       <Header
@@ -20,17 +66,47 @@ export function Register() {
           <h2>Dados da entidade</h2>
         </div>
 
-        <form>
-          <Input type="text" name="entity" label="Nome da entidade" />
+        <form id="formCreatePoint" onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="text"
+            label="Nome da entidade"
+            {...register("entity", { required: true })}
+            error={errors.entity}
+          />
           <div className={styles.address}>
-            <Input type="text" name="address" label="Endereço" />
-            <Input type="number" name="number" label="Número" />
+            <Input
+              type="text"
+              label="Endereço"
+              {...register("address")}
+              error={errors.address}
+            />
+            <Input
+              type="number"
+              label="Número"
+              {...register("number")}
+              error={errors.number}
+            />
           </div>
           <div className={styles.state}>
-            <Input type="text" name="city" label="Cidade" />
-            <Input type="text" name="state" label="Estado" />
+            <Input
+              type="text"
+              label="Cidade"
+              {...register("city")}
+              error={errors.city}
+            />
+            <Input
+              type="text"
+              label="Estado"
+              {...register("state")}
+              error={errors.state}
+            />
           </div>
-          <Input type="text" name="image" label="Link da imagem" />
+          <Input
+            type="text"
+            label="Link da imagem"
+            {...register("imageUrl")}
+            error={errors.imageUrl}
+          />
         </form>
 
         <div className={styles.subtitle}>
@@ -41,7 +117,11 @@ export function Register() {
         <Items />
 
         <div className={styles.submitting}>
-          <Button type="button" text="Cadastrar ponto de coleta" />
+          <Button
+            form="formCreatePoint"
+            type="submit"
+            text="Cadastrar ponto de coleta"
+          />
         </div>
       </section>
     </main>
