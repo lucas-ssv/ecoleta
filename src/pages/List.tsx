@@ -1,10 +1,24 @@
 import { FiArrowLeft } from "react-icons/fi";
 import { Header } from "../components/Header";
-import { Cards } from "../components/Cards";
+import { CardPoints } from "../components/CardPoints";
 import styles from "../styles/list.module.scss";
 import "../styles/common.scss";
+import { useEffect, useState } from "react";
+import { api } from "../services/api";
+
+interface Point {
+  points: [];
+}
 
 export function List() {
+  const [points, setPoints] = useState([]);
+
+  useEffect(() => {
+    api
+      .get<Point>("points")
+      .then((response) => setPoints(response.data.points));
+  }, []);
+
   return (
     <section className={styles.listContainer}>
       <main className="container">
@@ -19,7 +33,7 @@ export function List() {
         </div>
       </main>
       <article>
-        <Cards />
+        <CardPoints points={points} />
       </article>
     </section>
   );
