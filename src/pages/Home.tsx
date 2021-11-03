@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { FiLogIn, FiSearch } from "react-icons/fi";
 import { Header } from "../components/Header";
 import { Modal } from "../components/Modal";
@@ -11,7 +12,13 @@ import styles from "../styles/home.module.scss";
 import "../styles/common.scss";
 
 export function Home() {
-  const { openModal } = useContext(ModalContext);
+  const { openModal, closeModal } = useContext(ModalContext);
+  const history = useHistory();
+
+  function handleSearchPoints() {
+    history.push("/list");
+    closeModal();
+  }
 
   return (
     <>
@@ -20,7 +27,7 @@ export function Home() {
 
         <AsyncSelect placeholder="Digite a cidade" />
         <AsyncSelect placeholder="Digite a estado" />
-        <Button type="button" text="Buscar" />
+        <Button type="button" text="Buscar" onClick={handleSearchPoints} />
       </Modal>
 
       <main className="homeContainer">
