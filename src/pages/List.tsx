@@ -1,9 +1,9 @@
+import { useEffect, useMemo, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { Header } from "../components/Header";
 import { CardPoints } from "../components/CardPoints";
 import styles from "../styles/list.module.scss";
 import "../styles/common.scss";
-import { useEffect, useState } from "react";
 import { api } from "../services/api";
 
 interface Point {
@@ -12,6 +12,7 @@ interface Point {
 
 export function List() {
   const [points, setPoints] = useState([]);
+  const sizePoints = useMemo(() => points.length, [points]);
 
   useEffect(() => {
     api
@@ -28,7 +29,7 @@ export function List() {
           text="Voltar para home"
         />
         <div className={styles.foundPoints}>
-          <strong>2 pontos </strong>
+          <strong>{sizePoints} pontos </strong>
           <span>encontrados</span>
         </div>
       </main>
