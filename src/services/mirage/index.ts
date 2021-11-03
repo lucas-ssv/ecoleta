@@ -38,9 +38,16 @@ export function makeServer() {
 
     routes() {
       this.namespace = "api";
+      this.timing = 750;
 
       this.get("/points", (schema, request) => {
         return schema.all("point");
+      });
+
+      this.post("/points", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+
+        return schema.create("point", attrs);
       });
     },
   });
