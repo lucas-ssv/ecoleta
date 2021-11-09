@@ -56,8 +56,9 @@ export function Register() {
       imageUrl: point.imageUrl,
     };
 
-    try {
-      await api.post("points", formattedPoint).then(() => {
+    await api
+      .post("points", formattedPoint)
+      .then(() => {
         openModal();
         toast.success("Cadastro concluído com sucesso!");
 
@@ -65,10 +66,10 @@ export function Register() {
           closeModal();
           history.push("/");
         }, 2000);
+      })
+      .catch(() => {
+        toast.error("Occorreu um erro");
       });
-    } catch {
-      console.log("Ocorreu um erro");
-    }
   };
 
   return (
