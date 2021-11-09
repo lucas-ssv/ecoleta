@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FiLogIn, FiSearch } from "react-icons/fi";
+import { api } from "../services/api";
 import { Header } from "../components/Header";
 import { Modal } from "../components/Modal";
 import { ModalContext } from "../contexts/ModalContext";
@@ -11,13 +12,44 @@ import Pessoas from "../assets/Pessoas.svg";
 import styles from "../styles/home.module.scss";
 import "../styles/common.scss";
 
+interface AsyncSelectProps {
+  label: string;
+  value: string;
+}
+
+interface Points {
+  points: {
+    city: string;
+    state: string;
+  }[];
+}
+
 export function Home() {
+  const [cities, setCities] = useState<AsyncSelectProps[]>([]);
+  const [states, setStates] = useState<AsyncSelectProps[]>([]);
   const { openModal, closeModal } = useContext(ModalContext);
+  const citiesRef = useRef(null);
+  const statesRef = useRef(null);
   const history = useHistory();
 
+  useEffect(() => {
+    api.get<Points>("points").then((response) => {
+      const data = response.data.points;
+
+      data?.forEach((item) => {
+        setCities((city) => [...city, { label: item.city, value: item.city }]);
+        setStates((state) => [
+          ...state,
+          { label: item.state, value: item.state },
+        ]);
+      });
+    });
+  }, []);
+
   function handleSearchPoints() {
-    history.push("/list");
-    closeModal();
+    console.log(citiesRef.current);
+    // history.push("/list");
+    // closeModal();
   }
 
   return (
@@ -25,8 +57,16 @@ export function Home() {
       <Modal>
         <h1>Pontos de coleta</h1>
 
-        <AsyncSelect placeholder="Digite a cidade" />
-        <AsyncSelect placeholder="Digite a estado" />
+        <AsyncSelect
+          items={cities}
+          placeholder="Digite a cidade"
+          ref={citiesRef}
+        />
+        <AsyncSelect
+          items={states}
+          placeholder="Digite o estado"
+          ref={statesRef}
+        />
         <Button type="button" text="Buscar" onClick={handleSearchPoints} />
       </Modal>
 
