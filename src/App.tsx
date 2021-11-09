@@ -11,7 +11,7 @@ export function App() {
       <ModalProvider>
         <ItemProvider>
           <Routes />
-          <ToastContainer autoClose={3000} theme="light" />
+          <ToastContainer autoClose={3000} theme="colored" />
         </ItemProvider>
       </ModalProvider>
     </BrowserRouter>
