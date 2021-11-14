@@ -11,6 +11,11 @@ type PointProps = {
   imageUrl: string;
 };
 
+type PointDataProps = {
+  city: string;
+  state: string;
+};
+
 export function makeServer() {
   return createServer({
     environment: "development",
@@ -41,6 +46,17 @@ export function makeServer() {
       this.timing = 750;
 
       this.get("/points", (schema, request) => {
+        const attrs = request.queryParams;
+
+        if (!!attrs.data) {
+          const data: PointDataProps = JSON.parse(attrs.data);
+
+          return schema.where("point", {
+            city: data.city,
+            state: data.state,
+          });
+        }
+
         return schema.all("point");
       });
 
