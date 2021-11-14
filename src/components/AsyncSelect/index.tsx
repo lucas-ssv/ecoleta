@@ -8,10 +8,11 @@ interface AsyncSelectProps {
     value: string;
   }[];
   placeholder?: string;
+  name: string;
 }
 
 export const AsyncSelect = forwardRef(
-  ({ items, placeholder }: AsyncSelectProps, ref: any) => {
+  ({ items, name, placeholder }: AsyncSelectProps, ref: any) => {
     const filterCities = (inputValue: string) => {
       return items.filter((city) =>
         city.label.toLowerCase().includes(inputValue.toLowerCase())
@@ -35,6 +36,7 @@ export const AsyncSelect = forwardRef(
     return (
       <ReactAsyncSelect
         styles={customStyles}
+        name={name}
         cacheOptions
         loadOptions={loadOptions}
         defaultOptions
