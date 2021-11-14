@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { CommonProps } from "react-select";
 import { FiLogIn, FiSearch } from "react-icons/fi";
 import { api } from "../services/api";
 import { Header } from "../components/Header";
@@ -11,6 +12,7 @@ import Background from "../assets/Background.svg";
 import Pessoas from "../assets/Pessoas.svg";
 import styles from "../styles/home.module.scss";
 import "../styles/common.scss";
+import { toast } from "react-toastify";
 
 interface AsyncSelectProps {
   label: string;
@@ -28,8 +30,8 @@ export function Home() {
   const [cities, setCities] = useState<AsyncSelectProps[]>([]);
   const [states, setStates] = useState<AsyncSelectProps[]>([]);
   const { openModal, closeModal } = useContext(ModalContext);
-  const citiesRef = useRef(null);
-  const statesRef = useRef(null);
+  const citiesRef = useRef<CommonProps<AsyncSelectProps, false, any>>(null);
+  const statesRef = useRef<CommonProps<AsyncSelectProps, false, any>>(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -47,9 +49,22 @@ export function Home() {
   }, []);
 
   function handleSearchPoints() {
-    console.log(citiesRef.current);
-    // history.push("/list");
-    // closeModal();
+    const city = citiesRef.current?.getValue();
+    const state = statesRef.current?.getValue();
+
+    if (!city?.length || !state?.length) {
+      toast.warning("Preencha todos os campos");
+      return;
+    }
+
+    history.push({
+      pathname: "/list",
+      state: {
+        city: city[0].value,
+        state: state[0].value,
+      },
+    });
+    closeModal();
   }
 
   return (
@@ -59,11 +74,13 @@ export function Home() {
 
         <AsyncSelect
           items={cities}
+          name="city"
           placeholder="Digite a cidade"
           ref={citiesRef}
         />
         <AsyncSelect
           items={states}
+          name="state"
           placeholder="Digite o estado"
           ref={statesRef}
         />
