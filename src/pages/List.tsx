@@ -6,19 +6,33 @@ import styles from "../styles/list.module.scss";
 import "../styles/common.scss";
 import { api } from "../services/api";
 
+interface ListProps {
+  location: {
+    state: {
+      city: string;
+      state: string;
+    };
+  };
+}
+
 interface Point {
   points: [];
 }
 
-export function List() {
+export function List({ location }: ListProps) {
   const [points, setPoints] = useState([]);
   const sizePoints = useMemo(() => points.length, [points]);
+  const data = location.state || null;
 
   useEffect(() => {
     api
-      .get<Point>("points")
+      .get<Point>("points", {
+        params: {
+          data,
+        },
+      })
       .then((response) => setPoints(response.data.points));
-  }, []);
+  }, [data]);
 
   return (
     <section className={styles.listContainer}>
