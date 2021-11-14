@@ -29,5 +29,9 @@
 
   button {
     width: 100%;
+
+    &:hover {
+      filter: none;
+    }
   }
 }
