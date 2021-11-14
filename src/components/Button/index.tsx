@@ -1,14 +1,16 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, memo } from "react";
 import styles from "./button.module.scss";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
 }
 
-export function Button({ text, ...rest }: ButtonProps) {
+function ButtonComponent({ text, ...rest }: ButtonProps) {
   return (
     <button className={styles.button} {...rest}>
       <strong>{text}</strong>
     </button>
   );
 }
+
+export const Button = memo(ButtonComponent);
