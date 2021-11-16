@@ -5,7 +5,7 @@ import styles from "./input.module.scss";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  error: FieldError | undefined;
+  error?: FieldError | undefined;
 }
 
 export const Input = forwardRef(
